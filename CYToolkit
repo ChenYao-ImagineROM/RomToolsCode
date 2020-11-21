@@ -151,8 +151,7 @@ sleep 5
 main
 elif [[ $options == "#" ]]; then
 echo 
-echo -e "\033[32m工具决定于2021年1月1日至5月21日期间开源工具\033[0m"
-echo -e "\033[32m开源之后会进行偶尔更新 有人愿意的话可以继续接手更新\033[0m"
+echo -e "\033[32m开源地址：https://github.com/Imaginerom/CYToolkitForAndroid\033[0m"
 sleep 3
 main
 #重启
@@ -1552,21 +1551,21 @@ syssize=`cat system_size.txt`
 echo 
 echo -e "\033[32m开始打包vendor.img...\033[0m"
 echo 
-vendsize=`cat vendor_size.txt`
+vensize=`cat vendor_size.txt`
 ../tools/make_ext4fs_sj -T 0 -C "vendor_fs_config" -S "vendor_file_contexts" -l $vensize -a vendor -T 2009110000 "vendor.img" "vendor"
 echo 
-chmod +x ../tools/simg2img
-../tools/simg2img system.img system.rimg
+chmod +x ../tools/img2simg
+../tools/simg2img system.img system.simg
 rm -rf system.img
-mv system.rimg system.img
-../tools/simg2img vendor.img vendor.rimg
+mv system.simg system.img/
+../tools/img2simg vendor.img vendor.simg
 rm -rf vendor.img
-mv vendor.rimg vendor.img
+mv vendor.simg vendor.img
 echo -e "\033[32m开始打包system.new.dat...\033[0m"
-python3 ../tools/img2sdat/img2sdat.py system.img -v 4 -p system
+python3 ../tools/img2sdat/img2sdat.py system.img -v 4 -p system >> /dev/null 2>&1
 echo 
 echo -e "\033[32m开始打包vendor.new.dat...\033[0m"
-python3 ../tools/img2sdat/img2sdat.py vendor.img -v 4 -p vendor
+python3 ../tools/img2sdat/img2sdat.py vendor.img -v 4 -p vendor >> /dev/null 2>&1
 echo 
 echo -e "\033[32m开始打包system.new.dat.br...\033[0m"
 ../tools/brotli -q 3 system.new.dat
@@ -1579,7 +1578,7 @@ rm -rf system_file_context system_size.txt system_fs_config
 rm -rf vendor_file_context vendor_size.txt vendor_fs_config
 echo 
 echo -e "\033[32m开始打包zip...\033[0m"
-zip -r build.zip firmware-update/ boot.img system.new.dat.br vendor.new.dat.br META-INF/ compatibility.zip system.patch.dat system.transfer.list vendor.patch.dat vendor.transfer.list
+zip -r build.zip firmware-update/ boot.img system.new.dat.br vendor.new.dat.br META-INF/ compatibility.zip system.patch.dat system.transfer.list vendor.patch.dat vendor.transfer.list >> /dev/null 2>&1
 md5sum build.zip > 1
 sed -i "s/  build.zip//g" 1
 str=`cat 1`
