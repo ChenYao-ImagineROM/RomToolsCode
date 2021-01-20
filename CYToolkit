@@ -1,0 +1,1610 @@
+clear
+passwd(){
+read -p "请输入CYToolkit的密码>>>" passwd
+if [[ $passwd == "1" ]]; then
+echo -e "\033[34m密码正确\033[0m"
+sleep 2
+main
+else
+echo -e "\033[31m密码错误，请尊重作者的作品，请勿通过第三方下载\033[0m"
+sleep 2
+clear
+exit
+fi
+}
+main(){
+clear
+#欢迎
+echo -e "\033[34m   ========CYToolkit========\033[0m"
+echo -e "\033[32m  ‖   Powered by KevinKyuo  ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖     当前版本为3.5       ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖ 更新&官方鹅群：871930097‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖  酷安：@闲出屁的Imagine ‖\033[0m"
+echo -e "\033[32m   \033[34m=========================\033[0m"
+echo 
+#主程序
+echo -e "\033[34m   ========CYToolkit========\033[0m"
+echo -e "\033[32m  ‖1.Br项目    ‖ 2.Dat项目  ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖3.img项目   ‖ 4.一键解压 ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖5.清理文件  ‖ 6.解刷机包 ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖7.极限精简  ‖ 8.Boot项目 ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖9.img转换   ‖ 10.super项 ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖11.解压 Android 11 vendor‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖12.解压 payload ozip 文件‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖13.破解卡米 ‖ 14.一键做包‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖u.展望未来  ‖ #.开源决定?‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖r.重启工具  ‖ x.退出工具 ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖i.配置环境  ‖ f.删除工具 ‖\033[0m"
+echo -e "\033[32m   \033[34m=========================\033[0m"
+read -p "请选择>>>" options
+if [[ $options == "1" ]]; then
+broptions
+#解压dat
+elif [[ $options == "2" ]]; then
+datoptions
+#解压img
+elif [[ $options == "3" ]]; then
+imgoptions
+elif [[ $options == "4" ]]; then
+unpack
+#清理
+elif [[ $options == "5" ]]; then
+rm -rf *.txt
+rm -rf *.img
+rm -rf *.dat
+rm -rf *.br
+rm -rf *_file_contexts
+rm -rf *_fs_config
+echo -e "\033[34m清理完成\033[0m"
+sleep 3
+main
+#解压刷机包
+elif [[ $options == "6" ]]; then
+echo 
+echo -e "\033[34m当前项目目录内的zip文件有:\033[0m"
+ls *.zip
+echo 
+read -p "请输入您的zip文件>>" zipfile
+echo 
+echo -e "\033[32m开始解压\033[0m"
+unzip $zipfile
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $zipfile
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+#删apps
+elif [[ $options == "7" ]]; then
+echo -e "\033[31m删除后需破解卡米，否则会卡第二屏！！！\033[0m" 
+if [[ -f "system/build.prop" ]]; then
+echo -e "\033[32m检测到分区为Aonly，启动A方案\033[0m"
+bash tools/del_apps/AOption.sh
+echo -e "\033[34m完成\033[0m"
+sleep 3
+main
+elif [[ -f "system/system/build.prop" ]]; then
+echo -e "\033[32m检测到分区为AB/Sar，启动B方案\033[0m"
+bash tools/del_apps/BOption.sh
+echo -e "\033[34m完成\033[0m"
+sleep 3
+main
+else
+echo -e "\033[31m未检测到system文件夹，请解压system后重试\033[0m"
+sleep 3
+main
+fi
+#Boot
+elif [[ $options == "8" ]]; then
+boot
+#转换rsimg
+elif [[ $options == "9" ]]; then
+rsimg
+#解压缩super
+elif [[ $options == "10" ]]; then
+super
+elif [[ $options == "11" ]]; then
+androidRvendor
+elif [[ $options == "12" ]]; then
+payloadozip
+elif [[ $options == "13" ]]; then
+fuckmi
+elif [[ $options == "14" ]]; then
+autorom
+elif [[ $options == "u" ]]; then
+echo 
+echo -e "\033[32m工具自出现之日 会于3个月内写完以下功能\033[0m"
+echo 
+echo -e "\033[32m1.一键做包\033[0m"
+echo 
+echo -e "\033[32m2.加入英文版\033[0m"
+echo 
+echo -e "\033[32m3.自动修改刷脚本\033[0m"
+echo 
+echo -e "\033[32m4.鸟瞰system/vendor build.prop\033[0m"
+echo 
+echo -e "\033[32m5.全局zipalign化\033[0m"
+echo 
+sleep 5
+main
+elif [[ $options == "#" ]]; then
+echo 
+echo -e "\033[32m开源地址：https://github.com/Imaginerom/CYToolkitForAndroid\033[0m"
+sleep 3
+main
+#重启
+elif [[ $options == "r" ]]; then
+echo -e "\033[31mrebooting\033[0m"
+sleep 3
+clear
+bash CYToolkit
+#退出
+elif [[ $options == "x" ]]; then
+clear
+exit
+elif [[ $options == "i" ]]; then
+apt install openjdk-8-jre -y
+apt install openjdk-8-jdk -y
+apt install python3 -y
+apt install python3-pip -y
+apt install unzip -y
+echo -e "\033[31mrebooting\033[0m"
+sleep 3
+clear
+bash CYToolkit
+elif [[ $options == "f" ]]; then
+rm -rf tools/
+rm -rf CYToolkit
+clear
+exit
+fi
+}
+broptions(){
+echo -e "\033[34m   ========CYToolkit=======\033[0m"
+echo -e "\033[32m  ‖1.解压Br      2.打包Br  ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖x.返回菜单              ‖\033[0m"
+echo -e "\033[34m   ========================\033[0m"
+read -p "请选择>>>" br
+#解压br
+if [[ $br == "1" ]]; then
+chmod +x tools/brotli
+echo 
+echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
+ls *.br
+echo 
+read -p "请输入您的Br文件>>>" brfile
+echo 
+echo -e "\033[32m开始解压\033[0m"
+start=`date +%s`
+tools/brotli --decompress $brfile
+end=`date +%s`
+time=`echo $start $end | awk '{print $2-$1}'`
+echo 耗时$time秒
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $brfile
+echo 
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo 
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+fi
+#打包br
+if [[ $br == "2" ]]; then
+chmod +x tools/brotli
+echo -e "\033[34m   ========CYToolkit=======\033[0m"
+echo -e "\033[32m  ‖1.Dat转Br      2.img转Br‖\033[0m"
+echo -e "\033[34m   ========================\033[0m"
+read -p "请选择>>>" repackbr
+if [[ $repackbr == "1" ]]; then 
+echo 
+echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
+ls *.new.dat
+echo 
+read -p "请输入您的new.dat文件>>" datfile
+echo 
+echo -e "\033[32m开始打包\033[0m"
+tools/brotli -q 3 $datfile
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $datfile
+echo -e "\033[34m打包完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m打包完成\033[0m"
+sleep 3
+main
+fi
+elif [[ $repackbr == "2" ]]; then
+echo 
+echo -e "\033[34m当前项目目录内的img文件有:\033[0m"
+ls *.img
+echo 
+read -p "请输入您的img文件>>" imgfile
+echo 
+echo -e "\033[32m开始打包\033[0m"
+tools/brotli -q 3 $imgfile
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $imgfile
+echo -e "\033[34m打包完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m打包完成\033[0m"
+sleep 3
+main
+fi
+fi
+fi
+if [[ $br == "x" ]]; then
+main
+fi
+}
+datoptions(){
+echo -e "\033[34m   ========CYToolkit=======\033[0m"
+echo -e "\033[32m  ‖1.解压Dat    2.打包Dat  ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖x.返回菜单              ‖\033[0m"
+echo -e "\033[34m   ========================\033[0m"
+read -p "请选择>>>" dat
+if [[ $dat == "1" ]]; then
+echo 
+echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
+ls *.list
+echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
+ls *.new.dat
+echo 
+read -p "请输入您的transfer.list文件>>>" transfer
+read -p "请输入您的new.dat文件(别带后缀)>>" datfile
+python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+mv system.img $datfile'.img' >>/dev/null 2>&1
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $datfile'.new.dat'
+rm -rf $transfer
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+fi
+#打包dat
+if [[ $dat == "2" ]]; then
+echo 
+echo -e "\033[34m当前项目目录内的img文件有:\033[0m"
+ls *.img
+echo 
+read -p "请输入您的img文件(别带后缀)>>" imgfile
+echo 
+echo -e "\033[32m开始打包\033[0m"
+python3 tools/img2sdat/img2sdat.py $imgfile'.img' -p $imgfile
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $imgfile'.img'
+echo -e "\033[34m打包完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m打包完成\033[0m"
+sleep 3
+main
+fi
+fi
+if [[ $dat == "x" ]]; then
+main
+fi
+}
+imgoptions(){
+echo -e "\033[34m   ========CYToolkit=======\033[0m"
+echo -e "\033[32m  ‖1.解压img    2.打包img  ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖x.返回菜单              ‖\033[0m"
+echo -e "\033[34m   ========================\033[0m"
+read -p "请选择>>>" img
+if [[ $img == "1" ]]; then
+echo 
+echo -e "\033[34m当前项目目录内的img文件有:\033[0m"
+ls *.img
+echo 
+read -p "请输入您的img文件(别带.img)>>" imgfile
+echo 
+python3 tools/imgextractor/imgextractor.py $imgfile'.img' $imgfile
+if [[ -f "$imgfile/build.prop" ]];then
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $imgfile'.img'
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+elif [[ -f "$imgfile/system/build.prop" ]];then
+sed -i 's?^system/??' system_fs_config >>/dev/null 2>&1
+sed -i 's?^/system??' system_file_contexts >>/dev/null 2>&1
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $imgfile'.img'
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+fi
+fi
+#打包img
+if [[ $img == "2" ]]; then
+chmod +x tools/make_ext4fs
+chmod +x tools/make_ext4fs_sj
+echo 
+echo -e "\033[32m如果要打包安卓10的 system分区 请输入 / (斜杠)\033[0m"
+echo -e "\033[32m否则其他分区就输入对应的分区名\033[0m"
+echo
+read -p "请输入您的分区名>>>" imgname
+echo 
+if [[ $imgname == "/" ]]; then
+echo -e "\033[32m您的分区大小为\033[0m"
+cat system_size.txt
+echo 
+read -p "请输入分区大小>>>" size
+echo 
+tools/make_ext4fs_sj -s -T 0 -C "system_fs_config" -S "system_file_contexts" -l $size -a / -T 2009110000 "system.img" "system"
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf system
+rm -rf system_file_contexts
+rm -rf system_fs_config
+rm -rf system_size.txt
+echo -e "\033[34m打包完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m打包完成\033[0m"
+sleep 3
+main
+fi
+else
+echo -e "\033[32m您的分区大小为\033[0m"
+cat $imgname'_size.txt'
+echo 
+read -p "请输入分区大小>>>" size
+echo 
+echo -e "\033[32m请选择要打包的img类型\033[0m"
+echo -e "\033[32m1.simg(可直接刷入)\033[0m"
+echo -e "\033[32m2.rimg(不可直接刷入 需转成dat或br)\033[0m"
+echo
+read -p "请选择>>>" whatimg
+echo 
+if [[ $whatimg == "1" ]]; then
+tools/make_ext4fs -s -l $size -L $imgname -a $imgname -S $imgname'_file_contexts' -C $imgname'_fs_config' -T 2009110000 $imgname'.img' $imgname
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $imgname
+rm -rf $imgname'_file_contexts'
+rm -rf $imgname'_fs_config'
+rm -rf $imgname'_size.txt'
+echo -e "\033[34m打包完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m打包完成\033[0m"
+sleep 3
+main
+fi
+elif [[ $whatimg == "2" ]]; then
+tools/make_ext4fs -l $size -L $imgname -a $imgname -S $imgname'_file_contexts' -C $imgname'_fs_config' -T 2009110000 $imgname'.img' $imgname
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $imgname
+rm -rf $imgname'_file_contexts'
+rm -rf $imgname'_fs_config'
+rm -rf $imgname'_size.txt'
+echo -e "\033[34m打包完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m打包完成\033[0m"
+sleep 3
+main
+fi
+fi
+fi
+fi
+if [[ $img == "x" ]]; then
+main
+fi
+}
+unpack(){
+clear
+echo -e "\033[34m   =========CYToolkit=======\033[0m"
+echo -e "\033[32m  ‖ 1.Br to img(有源文件)   ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖ 2.Br to img(无源文件)   ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖ 3.Br to file(有源文件)  ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖ 4.Br to file(无源文件)  ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖ 5.Dat to file(有源文件) ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖ 6.Dat to file(无源文件) ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖ 7.Zip to img(有源文件)  ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖ 8.Zip to img(无源文件)  ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖ 9.Zip to file(有源文件) ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖ 0.Zip to file(无源文件) ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖ auto.全自动解压zip刷机包‖\033[0m"
+echo -e "\033[32m  ‖\033[34m=========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖ x.返回菜单              ‖\033[0m"
+echo -e "\033[34m   =========================\033[0m"
+read -p "请选择>>>" unpack
+if [[ $unpack == "x" ]]; then
+main
+fi
+#解压方式1
+if [[ $unpack == "1" ]]; then
+chmod +x tools/brotli
+echo 
+echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
+ls *.br
+echo 
+read -p "请输入您的Br文件>>>" brfile
+echo 
+echo -e "\033[32m开始解压\033[0m"
+tools/brotli --decompress $brfile
+echo 
+echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
+ls *.list
+echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
+ls *.new.dat
+echo 
+read -p "请输入您的transfer.list文件>>>" transfer
+read -p "请输入您的new.dat文件(别带后缀)>>" datfile
+python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+mv system.img $datfile'.img' >>/dev/null 2>&1
+echo 
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+#解压方式2
+if [[ $unpack == "2" ]]; then
+chmod +x tools/brotli
+echo 
+echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
+ls *.br
+echo 
+read -p "请输入您的Br文件>>>" brfile
+echo 
+echo -e "\033[32m开始解压\033[0m"
+tools/brotli --decompress $brfile
+echo 
+echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
+ls *.list
+echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
+ls *.new.dat
+echo 
+read -p "请输入您的transfer.list文件>>>" transfer
+read -p "请输入您的new.dat文件(别带后缀)>>" datfile
+python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+mv system.img $datfile'.img' >>/dev/null 2>&1
+echo 
+rm -rf $brfile
+rm -rf $datfile'.new.dat'
+rm -rf $transfer
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+#解压方式3
+if [[ $unpack == "3" ]]; then
+chmod +x tools/brotli
+echo 
+echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
+ls *.br
+echo 
+read -p "请输入您的Br文件>>>" brfile
+echo 
+echo -e "\033[32m开始解压\033[0m"
+tools/brotli --decompress $brfile
+echo 
+echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
+ls *.list
+echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
+ls *.new.dat
+echo 
+read -p "请输入您的transfer.list文件>>>" transfer
+read -p "请输入您的new.dat文件(别带后缀)>>" datfile
+python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+mv system.img $datfile'.img' >>/dev/null 2>&1
+echo 
+echo -e "\033[34m当前项目目录内的img文件有:\033[0m"
+ls *.img
+echo 
+read -p "请输入您的img文件(别带.img)>>" imgfile
+echo 
+python3 tools/imgextractor/imgextractor.py $imgfile'.img' $imgfile
+if [[ -f "$imgfile/build.prop" ]];then
+echo 
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+elif [[ -f "$imgfile/system/build.prop" ]];then
+sed -i 's?^system/??' system_fs_config >>/dev/null 2>&1
+echo a
+sed -i 's?^/system??' system_file_contexts >>/dev/null 2>&1
+echo 
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+fi
+#解压方式4
+if [[ $unpack == "4" ]]; then
+chmod +x tools/brotli
+echo 
+echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
+ls *.br
+echo 
+read -p "请输入您的Br文件>>>" brfile
+echo 
+echo -e "\033[32m开始解压\033[0m"
+tools/brotli --decompress $brfile
+echo 
+echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
+ls *.list
+echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
+ls *.new.dat
+echo 
+read -p "请输入您的transfer.list文件>>>" transfer
+read -p "请输入您的new.dat文件(别带后缀)>>" datfile
+python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+mv system.img $datfile'.img' >>/dev/null 2>&1
+echo 
+echo -e "\033[34m当前项目目录内的img文件有:\033[0m"
+ls *.img
+echo 
+read -p "请输入您的img文件(别带.img)>>" imgfile
+echo 
+python3 tools/imgextractor/imgextractor.py $imgfile'.img' $imgfile
+if [[ -f "$imgfile/build.prop" ]];then
+echo
+rm -rf $brfile
+rm -rf $datfile'.new.dat'
+rm -rf $transfer
+rm -rf $imgfile'.img'
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+elif [[ -f "$imgfile/system/build.prop" ]];then
+sed -i 's?^system/??' system_fs_config >>/dev/null 2>&1
+sed -i 's?^/system??' system_file_contexts >>/dev/null 2>&1
+rm -rf $brfile
+rm -rf $datfile'.new.dat'
+rm -rf $transfer
+rm -rf $imgfile'.img'
+echo  
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+fi
+#解压方式5
+if [[ $unpack == "5" ]]; then
+echo 
+echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
+ls *.list
+echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
+ls *.new.dat
+echo 
+read -p "请输入您的transfer.list文件>>>" transfer
+read -p "请输入您的new.dat文件(别带后缀)>>" datfile
+python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+mv system.img $datfile'.img' >>/dev/null 2>&1
+echo 
+echo -e "\033[34m当前项目目录内的img文件有:\033[0m"
+ls *.img
+echo 
+read -p "请输入您的img文件(别带.img)>>" imgfile
+echo 
+python3 tools/imgextractor/imgextractor.py $imgfile'.img' $imgfile
+if [[ -f "$imgfile/build.prop" ]];then
+echo 
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+elif [[ -f "$imgfile/system/build.prop" ]];then
+sed -i 's?^system/??' system_fs_config >>/dev/null 2>&1
+echo a
+sed -i 's?^/system??' system_file_contexts >>/dev/null 2>&1
+echo  
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+fi
+#解压方式6
+if [[ $unpack == "6" ]]; then
+echo 
+echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
+ls *.list
+echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
+ls *.new.dat
+echo 
+read -p "请输入您的transfer.list文件>>>" transfer
+read -p "请输入您的new.dat文件(别带后缀)>>" datfile
+python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+mv system.img $datfile'.img' >>/dev/null 2>&1
+echo 
+echo -e "\033[34m当前项目目录内的img文件有:\033[0m"
+ls *.img
+echo 
+read -p "请输入您的img文件(别带.img)>>" imgfile
+echo 
+python3 tools/imgextractor/imgextractor.py $imgfile'.img' $imgfile
+if [[ -f "$imgfile/build.prop" ]];then  
+rm -rf $datfile'.new.dat'
+rm -rf $transfer
+rm -rf $imgfile'.img'
+echo  
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+elif [[ -f "$imgfile/system/build.prop" ]];then
+sed -i 's?^system/??' system_fs_config >>/dev/null 2>&1
+sed -i 's?^/system??' system_file_contexts >>/dev/null 2>&1
+rm -rf $datfile'.new.dat'
+rm -rf $transfer
+rm -rf $imgfile'.img'
+echo  
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+fi
+#解压方式7
+if [[ $unpack == "7" ]]; then
+chmod +x tools/brotli
+echo 
+echo -e "\033[34m当前项目目录内的Zip文件有:\033[0m"
+ls *.zip
+echo 
+read -p "请输入您的Zip文件>>>" zipfile
+echo 
+echo -e "\033[32m开始解压\033[0m"
+unzip $zipfile
+echo 
+echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
+ls *.br
+echo 
+read -p "请输入您的Br文件>>>" brfile
+echo 
+echo -e "\033[32m开始解压\033[0m"
+tools/brotli --decompress $brfile
+echo 
+echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
+ls *.list
+echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
+ls *.new.dat
+echo 
+read -p "请输入您的transfer.list文件>>>" transfer
+read -p "请输入您的new.dat文件(别带后缀)>>" datfile
+python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+mv system.img $datfile'.img' >>/dev/null 2>&1
+echo 
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+#解压方式8
+if [[ $unpack == "8" ]]; then
+chmod +x tools/brotli
+echo 
+echo -e "\033[34m当前项目目录内的Zip文件有:\033[0m"
+ls *.zip
+echo 
+read -p "请输入您的Zip文件>>>" zipfile
+echo 
+echo -e "\033[32m开始解压\033[0m"
+unzip $zipfile
+echo 
+echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
+ls *.br
+echo 
+read -p "请输入您的Br文件>>>" brfile
+echo 
+echo -e "\033[32m开始解压\033[0m"
+tools/brotli --decompress $brfile
+echo 
+echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
+ls *.list
+echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
+ls *.new.dat
+echo 
+read -p "请输入您的transfer.list文件>>>" transfer
+read -p "请输入您的new.dat文件(别带后缀)>>" datfile
+python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+mv system.img $datfile'.img' >>/dev/null 2>&1
+echo 
+rm -rf $zipfile
+rm -rf $brfile
+rm -rf $datfile'.new.dat'
+rm -rf $transfer
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+#解压方式9
+if [[ $unpack == "9" ]]; then
+chmod +x tools/brotli
+echo 
+echo -e "\033[34m当前项目目录内的Zip文件有:\033[0m"
+ls *.zip
+echo 
+read -p "请输入您的Zip文件>>>" zipfile
+echo 
+echo -e "\033[32m开始解压\033[0m"
+unzip $zipfile
+echo 
+echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
+ls *.br
+echo 
+read -p "请输入您的Br文件>>>" brfile
+echo 
+echo -e "\033[32m开始解压\033[0m"
+tools/brotli --decompress $brfile
+echo 
+echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
+ls *.list
+echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
+ls *.new.dat
+echo 
+read -p "请输入您的transfer.list文件>>>" transfer
+read -p "请输入您的new.dat文件(别带后缀)>>" datfile
+python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+mv system.img $datfile'.img' >>/dev/null 2>&1
+echo 
+echo -e "\033[34m当前项目目录内的img文件有:\033[0m"
+ls *.img
+echo 
+read -p "请输入您的img文件(别带.img)>>" imgfile
+echo 
+python3 tools/imgextractor/imgextractor.py $imgfile'.img' $imgfile
+if [[ -f "$imgfile/build.prop" ]];then
+echo 
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+elif [[ -f "$imgfile/system/build.prop" ]];then
+sed -i 's?^system/??' system_fs_config >>/dev/null 2>&1
+echo a
+sed -i 's?^/system??' system_file_contexts >>/dev/null 2>&1
+echo 
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+fi
+#解压方式0
+if [[ $unpack == "0" ]]; then
+chmod +x tools/brotli
+echo 
+echo -e "\033[34m当前项目目录内的Zip文件有:\033[0m"
+ls *.zip
+echo 
+read -p "请输入您的Zip文件>>>" zipfile
+echo 
+echo -e "\033[32m开始解压\033[0m"
+unzip $zipfile
+echo 
+echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
+ls *.br
+echo 
+read -p "请输入您的Br文件>>>" brfile
+echo 
+echo -e "\033[32m开始解压\033[0m"
+tools/brotli --decompress $brfile
+echo 
+echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
+ls *.list
+echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
+ls *.new.dat
+echo 
+read -p "请输入您的transfer.list文件>>>" transfer
+read -p "请输入您的new.dat文件(别带后缀)>>" datfile
+python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+mv system.img $datfile'.img' >>/dev/null 2>&1
+echo 
+echo -e "\033[34m当前项目目录内的img文件有:\033[0m"
+ls *.img
+echo 
+read -p "请输入您的img文件(别带.img)>>" imgfile
+echo 
+python3 tools/imgextractor/imgextractor.py $imgfile'.img' $imgfile
+if [[ -f "$imgfile/build.prop" ]];then
+echo
+rm -rf $zipfile
+rm -rf $brfile
+rm -rf $datfile'.new.dat'
+rm -rf $transfer
+rm -rf $imgfile'.img'
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+elif [[ -f "$imgfile/system/build.prop" ]];then
+sed -i 's?^system/??' system_fs_config >>/dev/null 2>&1
+sed -i 's?^/system??' system_file_contexts >>/dev/null 2>&1
+rm -rf $zipfile
+rm -rf $brfile
+rm -rf $datfile'.new.dat'
+rm -rf $transfer
+rm -rf $imgfile'.img'
+echo  
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+fi
+#自动解压
+if [[ $unpack == "auto" ]]; then
+chmod +x tools/brotli
+echo 
+echo -e "\033[34m当前项目目录内的Zip文件有:\033[0m"
+ls *.zip
+echo 
+read -p "请指定一个需要解压的Zip>>>" zipfile
+echo 
+echo -e "\033[32m开始解压zip\033[0m"
+unzip $zipfile
+rm -rf $zipfile
+echo 
+if [[ -f "system.new.dat.br" ]]; then
+echo 
+echo -e "\033[32m开始解压system.new.dat.br\033[0m"
+tools/brotli --decompress system.new.dat.br
+rm -rf system.new.dat.br
+fi
+if [[ -f "vendor.new.dat.br" ]]; then
+echo 
+echo -e "\033[32m开始解压vendor.new.dat.br\033[0m"
+tools/brotli --decompress vendor.new.dat.br
+rm -rf vendor.new.dat.br
+fi
+if [[ -f "product.new.dat.br" ]]; then
+echo 
+echo -e "\033[32m开始解压product.new.dat.br\033[0m"
+tools/brotli --decompress product.new.dat.br
+rm -rf product.new.dat.br
+fi
+if [[ -f "odm.new.dat.br" ]]; then
+echo 
+echo -e "\033[32m开始解压odm.new.dat.br\033[0m"
+tools/brotli --decompress odm.new.dat.br
+rm -rf odm.new.dat.br
+fi
+if [[ -f "system.new.dat" ]]; then
+echo 
+echo -e "\033[32m开始解压system.new.dat\033[0m"
+python3 tools/sdat2img/sdat2img.py system.transfer.list system.new.dat system.img >>/dev/null 2>&1
+rm -rf system.transfer.list system.new.dat system.patch.dat
+fi
+if [[ -f "vendor.new.dat" ]]; then
+echo 
+echo -e "\033[32m开始解压vendor.new.dat\033[0m"
+python3 tools/sdat2img/sdat2img.py vendor.transfer.list vendor.new.dat vendor.img >>/dev/null 2>&1
+rm -rf vendor.transfer.list vendor.new.dat vendor.patch.dat
+fi
+if [[ -f "product.new.dat" ]]; then
+echo 
+echo -e "\033[32m开始解压product.new.dat\033[0m"
+python3 tools/sdat2img/sdat2img.py product.transfer.list product.new.dat product.img >>/dev/null 2>&1
+rm -rf product.transfer.list product.new.dat product.patch.dat
+fi
+if [[ -f "odm.new.dat" ]]; then
+echo 
+echo -e "\033[32m开始解压odm.new.dat\033[0m"
+python3 tools/sdat2img/sdat2img.py odm.transfer.list odm.new.dat odm.img >>/dev/null 2>&1
+rm -rf odm.transfer.list odm.new.dat odm.patch.dat
+fi
+if [[ -f "system.img" ]]; then
+echo 
+echo -e "\033[32m开始解压system.img\033[0m"
+python3 tools/imgextractor/imgextractor.py system.img system >>/dev/null 2>&1
+if [[ -f "system/build.prop" ]];then
+rm -rf system.img
+if [[ -f "vendor.img" ]]; then
+echo 
+echo -e "\033[32m开始解压vendor.img\033[0m"
+python3 tools/imgextractor/imgextractor.py vendor.img vendor >>/dev/null 2>&1
+rm -rf vendor.img
+fi
+if [[ -f "product.img" ]]; then
+echo 
+echo -e "\033[32m开始解压product.img\033[0m"
+python3 tools/imgextractor/imgextractor.py product.img product >>/dev/null 2>&1
+rm -rf product.img
+fi
+if [[ -f "odm.img" ]]; then
+echo 
+echo -e "\033[32m开始解压odm.img\033[0m"
+python3 tools/imgextractor/imgextractor.py odm.img odm >>/dev/null 2>&1
+rm -rf odm.img
+fi
+echo 
+echo -e "\033[32m解压完成\033[0m"
+sleep 3
+main
+elif [[ -f "system/system/build.prop" ]];then
+sed -i 's?^system/??' system_fs_config >>/dev/null 2>&1
+sed -i 's?^/system??' system_file_contexts >>/dev/null 2>&1
+rm -rf system.img
+if [[ -f "vendor.img" ]]; then
+echo 
+echo -e "\033[32m开始解压vendor.img\033[0m"
+python3 tools/imgextractor/imgextractor.py vendor.img vendor >>/dev/null 2>&1
+rm -rf vendor.img
+fi
+if [[ -f "product.img" ]]; then
+echo 
+echo -e "\033[32m开始解压product.img\033[0m"
+python3 tools/imgextractor/imgextractor.py product.img product >>/dev/null 2>&1
+rm -rf product.img
+fi
+if [[ -f "odm.img" ]]; then
+echo 
+echo -e "\033[32m开始解压odm.img\033[0m"
+python3 tools/imgextractor/imgextractor.py odm.img odm >>/dev/null 2>&1
+rm -rf odm.img
+fi
+echo 
+echo -e "\033[32m解压完成\033[0m"
+sleep 3
+main
+fi
+fi
+fi
+}
+boot(){
+echo -e "\033[34m   ========CYToolkit=======\033[0m"
+echo -e "\033[32m  ‖1.解压boot    2.打包boot‖\033[0m"
+echo -e "\033[32m  ‖\033[34m========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖x.返回菜单              ‖\033[0m"
+echo -e "\033[34m   ========================\033[0m"
+read -p "请选择>>>" boot
+if [[ $boot == "1" ]]; then
+echo 
+echo -e "\033[34m当前项目目录内的boot.img文件有:\033[0m"
+ls boot.img
+echo 
+read -p "请输入您的boot.img文件>>" bootfile
+bash tools/AIK/unpackimg.sh $bootfile
+mkdir boot_out
+cp -r tools/AIK/ramdisk/ boot_out
+cp -r tools/AIK/split_img/ boot_out
+rm -rf tools/AIK/ramdisk/ tools/AIK/split_img/
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $bootfile
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+fi
+if [[ $boot == "2" ]]; then
+if [[ -d "boot_out/split_img" ]]; then
+cp -r boot_out/ramdisk/ tools/AIK
+cp -r boot_out/split_img/ tools/AIK
+bash tools/AIK/repackimg.sh
+cp tools/AIK/image-new.img boot_out/
+bash tools/AIK/cleanup.sh >> /dev/null 2>&1
+mv boot_out/image-new.img boot_out/boot.img
+echo
+echo -e "\033[34m打包完成\033[0m"
+sleep 3
+main
+else
+echo 
+echo -e "\033[31mboot_out文件夹内没有split_img文件夹，请检查！\033[0m" 
+sleep 3
+main
+fi
+fi
+if [[ $boot == "x" ]]; then
+main
+fi
+}
+rsimg(){
+echo -e "\033[34m   =========CYToolkit========\033[0m"
+echo -e "\033[32m  ‖1.rimg转simg  2.simg转ring‖\033[0m"
+echo -e "\033[32m  ‖\033[34m==========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖x.返回菜单                ‖\033[0m"
+echo -e "\033[34m   ==========================\033[0m"
+read -p "请选择>>>" rsimg
+if [[ $rsimg == "1" ]]; then
+chmod +x tools/img2simg
+echo 
+echo -e "\033[34m当前项目目录内的img文件有:\033[0m"
+ls *.img
+echo 
+read -p "请输入您的img文件(别带后缀)>>>" rimgfile
+echo
+echo -e "\033[32m开始转换\033[0m"
+tools/img2simg $rimgfile'.img' $rimgfile'.simg'
+mv $rimgfile'.img' $rimgfile'.rimg'
+mv $rimgfile'.simg' $rimgfile'.img'
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $rimgfile'.rimg'
+echo -e "\033[34m转换完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m转换完成\033[0m"
+sleep 3
+main
+fi
+fi
+if [[ $rsimg == "2" ]]; then
+chmod +x tools/simg2img
+echo 
+echo -e "\033[34m当前项目目录内的img文件有:\033[0m"
+ls *.img
+echo 
+read -p "请输入您的img文件(别带后缀)>>>" simgfile
+echo
+echo -e "\033[32m开始转换\033[0m"
+tools/simg2img $simgfile'.img' $simgfile'.rimg'
+mv $simgfile'.img' $simgfile'.simg'
+mv $simgfile'.rimg' $simgfile'.img'
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $simgfile'.simg'
+echo -e "\033[34m转换完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m转换完成\033[0m"
+sleep 3
+main
+fi
+fi
+if [[ $rsimg == "x" ]]; then
+main
+fi
+}
+super(){
+echo -e "\033[34m   ========CYToolkit=======\033[0m"
+echo -e "\033[32m  ‖1.解压img    2.打包img  ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m========================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖x.返回菜单              ‖\033[0m"
+echo -e "\033[34m   ========================\033[0m"
+read -p "请选择>>>" superimg
+if [[ $superimg == "1" ]]; then
+chmod +x tools/build_super/lpunpack
+chmod +x tools/simg2img
+echo 
+echo -e "\033[34m当前项目目录内的super.img文件有:\033[0m"
+ls super.img
+echo 
+read -p "请输入您的img文件>>>" superfile
+echo 
+echo -e "\033[32m保存信息ing\033[0m" 
+file $superfile > file.txt
+if [ $(grep -o 'sparse' file.txt) ];then
+echo 
+echo -e "\033[34m当前super.img转换为rimg中......\033[0m"
+tools/simg2img $superfile superr.img
+echo 
+echo -e "\033[32m转换完成\033[0m"
+echo
+echo -e "\033[34m解压super.img中.....\033[0m"
+tools/build_super/lpunpack superr.img
+mkdir super
+mv system.img vendor.img product.img odm.img super/
+rm -rf file.txt
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $superfile
+rm -rf superr.img
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+else
+echo
+echo -e "\033[34m解压super.img中.....\033[0m"
+tools/build_super/lpunpack super.img
+mkdir super
+mv system.img vendor.img product.img odm.img super/
+rm -rf file.txt
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $superfile
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+fi
+fi
+if [[ $superimg == "2" ]]; then
+echo 
+echo -e "\033[32m修复中...\033[0m"
+sleep 3
+main
+fi
+if [[ $superimg == "x" ]]; then
+main
+fi
+}
+androidRvendor(){
+echo 
+echo -e "\033[34m当前项目目录内的vendor文件有:\033[0m"
+ls vendor.img
+echo 
+read -p "请输入您的img文件>>>" Rvendor
+file $Rvendor >> file.txt
+if [ $(grep -o 'sparse' file.txt) ];then
+echo 
+echo -e "\033[32m当前vendor.img转换为rimg中......\033[0m"
+chmod +x tools/simg2img
+tools/simg2img $Rvendor vendorr.img
+echo 
+echo -e "\033[32m开始解压\033[0m"
+echo 
+bash tools/getmeta3_rimg.py vendor.img vemdor_R
+rm -rf file.txt
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $Rvendor
+rm -rf vendorr.img
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+else
+echo 
+echo -e "\033[32m开始解压\033[0m"
+echo 
+bash tools/getmeta3_rimg.py vendor.img vemdor_R
+rm -rf file.txt
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $Rvendor
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m解压完成\033[0m"
+sleep 3
+main
+fi
+fi
+}
+payloadozip(){
+echo -e "\033[34m   ==========CYToolkit=========\033[0m"
+echo -e "\033[32m  ‖1.解压ozip    2.解压payload ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m============================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖3.安装解压环境(首次必须装)  ‖\033[0m"
+echo -e "\033[32m  ‖\033[34m============================\033[32m‖\033[0m"
+echo -e "\033[32m  ‖x.返回菜单                  ‖\033[0m"
+echo -e "\033[34m   ============================\033[0m"
+read -p "请选择>>>" payloadozip
+if [[ $payloadozip == "1" ]]; then
+echo 
+echo -e "\033[34m当前项目目录内的ozip文件有:\033[0m"
+ls *.ozip
+echo 
+read -p "请输入您的ozip文件>>>" ozipfile
+echo
+echo -e "\033[32m开始转换\033[0m"
+python3 tools/oppo_ozip/ozipdecrypt.py $ozipfile
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $ozipfile
+echo -e "\033[34m转换完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m转换完成\033[0m"
+sleep 3
+main
+fi
+fi
+if [[ $payloadozip == "2" ]]; then
+echo 
+echo -e "\033[34m当前项目目录内的payload.bin文件有:\033[0m"
+ls payload.bin
+echo 
+read -p "请输入您的bin文件>>>" payloadfile
+echo
+echo -e "\033[32m开始转换\033[0m"
+mkdir payload_out
+python3 tools/payload/payload.py $payloadfile payload_out
+echo 
+echo -e "\033[33m是否需要删除源文件?\033[0m" 
+echo -e "\033[32m1.需要\033[0m"
+echo -e "\033[32m2.不需要\033[0m"
+read -p "请选择>>>" del
+if [[ $del == "1" ]]; then
+rm -rf $payloadfile
+echo -e "\033[34m转换完成\033[0m"
+sleep 3
+main
+elif [[ $del == "2" ]]; then
+echo -e "\033[34m转换完成\033[0m"
+sleep 3
+main
+fi
+fi
+if [[ $payloadozip == "3" ]]; then
+pip3 install -r tools/payload/requirements.txt
+pip3 install pycryptodom
+echo -e "\033[34m安装完成\033[0m"
+sleep 3
+main
+fi
+if [[ $payloadozip == "x" ]]; then
+main
+fi
+}
+fuckmi(){
+start(){
+rm -rf temp >> /dev/null 2>&1
+echo 
+echo -e "\033[32m请把services.jar放在工具目录\033[0m" 
+echo -e "\033[32m没有问题请输入yes以进行下一步\033[0m"
+echo 
+read -p "请输入>>>" sure
+if [[ $sure == yes ]]; then
+echo 
+echo -e "\033[32m正在创建缓存文件夹...\033[0m"
+mkdir temp >> /dev/null 2>&1
+echo 
+echo -e "\033[32m检测文件...\033[0m"
+echo 
+echo -e "\033[32m开始移动文件...\033[0m"
+mv services.jar temp >> /dev/null 2>&1
+mv temp/services.jar temp/services.zip
+echo 
+echo -e "\033[32m正在展开services.jar...\033[0m"
+unzip temp/services.zip -d temp
+classes
+else
+echo 
+echo -e "\033[32m正在结束破解...\033[0m"
+sleep 2
+main
+fi
+}
+classes(){
+echo 
+echo -e "\033[32m正在准备核心文件...\033[0m"
+echo 
+echo -e "\033[31m如果有classes2.dex 请输入classes2(不用输入.dex)\033[0m"
+echo -e "\033[31m没有请输入classes(不用输入.dex) 均无请先deodex后再试\033[0m"
+echo 
+ls temp/*.dex
+echo 
+read -p "请输入>>>" classfile
+echo 
+echo -e "\033[32m开始展开dex...\033[0m"
+java -jar tools/services/baksmali.jar disassemble temp/$classfile'.dex' -o temp/$classfile
+echo 
+echo -e "\033[32m开始删除卡米代码...\033[0m"
+sed -i '/^.method private checkSystemSelfProtection(Z)V/,/^.end method/{//!d}' temp/$classfile/com/miui/server/SecurityManagerService.smali
+sed -i -e '/^.method private checkSystemSelfProtection(Z)V/a\    .registers 2\n\n    return-void' temp/$classfile/com/miui/server/SecurityManagerService.smali
+echo  
+repack
+}
+repack(){
+echo -e "\033[32m开始清理文件...\033[0m"
+rm -rf temp/$classesfile'.dex' temp/services.zip
+echo 
+echo -e "\033[32m开始打包classes2.dex...\033[0m"
+java -jar tools/services/smali.jar assemble temp/$classfile -o temp/$classfile'.dex'
+echo 
+echo -e "\033[32m开始打包services.jar...\033[0m"
+cd temp
+zip -r services.zip *.dex META-INF/
+mv services.zip services.jar
+midone
+}
+midone(){
+cd ..
+mv temp/services.jar .
+echo 
+echo -e "\033[32m开始清理余下文件...\033[0m"
+rm -rf temp
+echo 
+echo -e "\033[32m破解完成...\033[0m"
+sleep 2
+main
+}
+start
+}
+autorom(){
+chmod +x tools/brotli
+echo 
+echo -e "\033[32m当前仅支持Android10且非动态分区\033[0m"
+echo -e "\033[32m如无问题请输入 yes 以继续\033[0m"
+echo 
+read -p "请输入>>>" sure
+if [[ $sure == "yes" ]]; then
+echo 
+echo -e "\033[34m当前项目目录内的Zip文件有:\033[0m"
+ls *.zip
+echo 
+read -p "请选择一个需要制作的ROM>>>" zipfile
+echo 
+mkdir temp
+mv $zipfile temp
+cd temp
+echo -e "\033[32m开始解压zip...\033[0m"
+echo 
+unzip $zipfile
+rm -rf $zipfile
+echo 
+echo -e "\033[32m开始解压system.new.dat.br...\033[0m"
+../tools/brotli --decompress system.new.dat.br
+echo 
+echo -e "\033[32m开始解压vendor.new.dat.br...\033[0m"
+../tools/brotli --decompress vendor.new.dat.br
+echo 
+echo -e "\033[32m开始解压system.new.dat...\033[0m"
+python3 ../tools/sdat2img/sdat2img.py system.transfer.list system.new.dat system.img >>/dev/null 2>&1
+echo 
+echo -e "\033[32m开始解压vendor.new.dat...\033[0m"
+python3 ../tools/sdat2img/sdat2img.py vendor.transfer.list vendor.new.dat vendor.img >>/dev/null 2>&1
+echo 
+echo -e "\033[32m开始解压system.img...\033[0m"
+python3 ../tools/imgextractor/imgextractor.py system.img system >>/dev/null 2>&1
+sed -i 's?^system/??' system_fs_config >>/dev/null 2>&1
+sed -i 's?^/system??' system_file_contexts >>/dev/null 2>&1
+echo 
+echo -e "\033[32m开始解压vendor.img...\033[0m"
+python3 ../tools/imgextractor/imgextractor.py vendor.img vendor.img >>/dev/null 2>&1
+rm -rf system.new.dat system.new.dat.br
+rm -rf vendor.new.dat vendor.new.dat.br
+rm -rf system.img vendor.img
+rm -rf system.patch.dat system.transfer.list
+rm -rf vendor.patch.dat vendor.transfer.list 
+buildid=`cat vendor/build.prop | grep ro.vendor.build.id | cut -d '=' -f2`
+andver=`cat vendor/build.prop | grep ro.vendor.build.version.release | cut -d '=' -f2`
+device=`cat vendor/build.prop | grep ro.product.vendor.model | cut -d '=' -f2`
+code=`cat vendor/build.prop | grep ro.product.vendor.name | cut -d '=' -f2`
+miuiver=`cat vendor/build.prop | grep ro.vendor.build.version.incremental | cut -d '=' -f2`
+echo 
+echo -e "\033[32mBuild信息为：$buildid\033[0m" 
+echo -e "\033[32m安卓版本为：$andver\033[0m" 
+echo -e "\033[32m当前机型为：$device\033[0m" 
+echo -e "\033[32m机型代号为：$code\033[0m" 
+echo -e "\033[32mMIUI版本为：$miuiver\033[0m" 
+echo 
+sleep 5
+echo -e "\033[32m开始破解卡米...\033[0m"
+echo 
+mkdir temp
+mv system/system/framework/services.jar temp >> /dev/null 2>&1
+mv temp/services.jar temp/services.zip
+echo -e "\033[32m正在展开services.jar...\033[0m"
+echo 
+unzip temp/services.zip -d temp
+echo -e "\033[32m开始展开dex...\033[0m"
+echo 
+java -jar ../tools/services/baksmali.jar disassemble temp/classes2.dex -o temp/classes2 
+echo -e "\033[32m开始删除卡米代码...\033[0m"
+sed -i '/^.method private checkSystemSelfProtection(Z)V/,/^.end method/{//!d}' temp/classes2/com/miui/server/SecurityManagerService.smali
+sed -i -e '/^.method private checkSystemSelfProtection(Z)V/a\    .registers 2\n\n    return-void' temp/classes2/com/miui/server/SecurityManagerService.smali
+echo  
+echo -e "\033[32m开始清理文件...\033[0m"
+rm -rf temp/classes2.dex temp/services.zip
+echo 
+echo -e "\033[32m开始打包classes2.dex...\033[0m"
+java -jar ../tools/services/smali.jar assemble temp/classes2 -o temp/classes2.dex
+echo 
+echo -e "\033[32m开始打包services.jar...\033[0m"
+cd temp
+zip -r services.zip *.dex META-INF/
+mv services.zip services.jar
+cd ..
+mv temp/services.jar system/system/framework
+echo 
+echo -e "\033[32m破解完成...\033[0m"
+rm -rf temp
+echo 
+chmod +x ../tools/make_ext4fs_sj
+chmod +x ../tools/make_ext4fs
+echo -e "\033[32m开始打包system.img...\033[0m"
+echo 
+syssize=`cat system_size.txt`
+../tools/make_ext4fs_sj -T 0 -C "system_fs_config" -S "system_file_contexts" -l $syssize -a / -T 2009110000 "system.img" "system"
+chmod +x ../tools/img2simg
+../tools/img2simg system.img system.simg
+rm -rf system.img
+mv system.simg system.img
+echo 
+echo -e "\033[32m开始打包vendor.img...\033[0m"
+echo 
+vensize=`cat vendor_size.txt`
+../tools/make_ext4fs_sj -T 0 -C "vendor_fs_config" -S "vendor_file_contexts" -l $vensize -a vendor -T 2009110000 "vendor.img" "vendor"
+../tools/img2simg vendor.img vendor.simg
+rm -rf vendor.img
+mv vendor.simg vendor.img
+echo 
+echo -e "\033[32m开始打包system.new.dat...\033[0m"
+python3 ../tools/img2sdat/img2sdat.py system.img -v 4 -p system >> /dev/null 2>&1
+echo 
+echo -e "\033[32m开始打包vendor.new.dat...\033[0m"
+python3 ../tools/img2sdat/img2sdat.py vendor.img -v 4 -p vendor >> /dev/null 2>&1
+echo 
+echo -e "\033[32m开始打包system.new.dat.br...\033[0m"
+../tools/brotli -q 3 system.new.dat
+echo 
+echo -e "\033[32m开始打包vendor.new.dat.br...\033[0m"
+../tools/brotli -q 3 vendor.new.dat
+rm -rf system.new.dat system.img system
+rm -rf vendor.new.dat vendor.img vendor
+rm -rf system_file_context system_size.txt system_fs_config
+rm -rf vendor_file_context vendor_size.txt vendor_fs_config
+echo 
+echo -e "\033[32m开始打包zip...\033[0m"
+zip -r build.zip firmware-update/ boot.img system.new.dat.br vendor.new.dat.br META-INF/ compatibility.zip system.patch.dat system.transfer.list vendor.patch.dat vendor.transfer.list >> /dev/null 2>&1
+md5sum build.zip > 1
+sed -i "s/  build.zip//g" 1
+str=`cat 1`
+md5=`expr substr $str 1 6`
+cd ..
+mv temp/build.zip .
+echo 'miui_'$device'_'$miuiver'_'$md5'_'$andver'.0.zip' > 2
+sed -i "s/ //g" 2
+name=`cat 2`
+mv build.zip $name
+rm -rf temp
+rm -rf 2
+echo 
+echo -e "\033[32m制作完成\033[0m"
+echo 
+echo -e "\033[32mMD5为：$str\033[0m" 
+echo 
+echo -e "\033[32m文件名为：$name\033[0m" 
+echo 
+sleep 3
+main
+else
+echo 
+echo -e "\033[32m正在结束...\033[0m"
+sleep 2
+main
+fi
+}
+passwd
