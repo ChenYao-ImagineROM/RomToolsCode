@@ -151,7 +151,7 @@ sleep 5
 main
 elif [[ $options == "#" ]]; then
 echo 
-echo -e "\033[32m开源地址：https://github.com/Imaginerom/CYToolkitForAndroid\033[0m"
+echo -e "\033[32m开源地址：https://github.com/KevinKyuo/CYToolkitForAndroid\033[0m"
 sleep 3
 main
 #重启
@@ -167,7 +167,7 @@ exit
 elif [[ $options == "i" ]]; then
 apt install openjdk-8-jre -y
 apt install openjdk-8-jdk -y
-apt install python3 -y
+apt install python3 brotli -y
 apt install python3-pip -y
 apt install unzip -y
 echo -e "\033[31mrebooting\033[0m"
@@ -190,7 +190,7 @@ echo -e "\033[34m   ========================\033[0m"
 read -p "请选择>>>" br
 #解压br
 if [[ $br == "1" ]]; then
-chmod +x tools/brotli
+chmod +x brotli
 echo 
 echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
 ls *.br
@@ -199,7 +199,7 @@ read -p "请输入您的Br文件>>>" brfile
 echo 
 echo -e "\033[32m开始解压\033[0m"
 start=`date +%s`
-tools/brotli --decompress $brfile
+brotli --decompress $brfile
 end=`date +%s`
 time=`echo $start $end | awk '{print $2-$1}'`
 echo 耗时$time秒
@@ -223,7 +223,7 @@ fi
 fi
 #打包br
 if [[ $br == "2" ]]; then
-chmod +x tools/brotli
+chmod +x brotli
 echo -e "\033[34m   ========CYToolkit=======\033[0m"
 echo -e "\033[32m  ‖1.Dat转Br      2.img转Br‖\033[0m"
 echo -e "\033[34m   ========================\033[0m"
@@ -236,7 +236,7 @@ echo
 read -p "请输入您的new.dat文件>>" datfile
 echo 
 echo -e "\033[32m开始打包\033[0m"
-tools/brotli -q 3 $datfile
+brotli -q 3 $datfile
 echo 
 echo -e "\033[33m是否需要删除源文件?\033[0m" 
 echo -e "\033[32m1.需要\033[0m"
@@ -260,7 +260,7 @@ echo
 read -p "请输入您的img文件>>" imgfile
 echo 
 echo -e "\033[32m开始打包\033[0m"
-tools/brotli -q 3 $imgfile
+brotli -q 3 $imgfile
 echo 
 echo -e "\033[33m是否需要删除源文件?\033[0m" 
 echo -e "\033[32m1.需要\033[0m"
@@ -525,7 +525,7 @@ main
 fi
 #解压方式1
 if [[ $unpack == "1" ]]; then
-chmod +x tools/brotli
+chmod +x brotli
 echo 
 echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
 ls *.br
@@ -533,7 +533,7 @@ echo
 read -p "请输入您的Br文件>>>" brfile
 echo 
 echo -e "\033[32m开始解压\033[0m"
-tools/brotli --decompress $brfile
+brotli --decompress $brfile
 echo 
 echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
 ls *.list
@@ -551,7 +551,7 @@ main
 fi
 #解压方式2
 if [[ $unpack == "2" ]]; then
-chmod +x tools/brotli
+chmod +x brotli
 echo 
 echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
 ls *.br
@@ -559,7 +559,7 @@ echo
 read -p "请输入您的Br文件>>>" brfile
 echo 
 echo -e "\033[32m开始解压\033[0m"
-tools/brotli --decompress $brfile
+brotli --decompress $brfile
 echo 
 echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
 ls *.list
@@ -580,7 +580,7 @@ main
 fi
 #解压方式3
 if [[ $unpack == "3" ]]; then
-chmod +x tools/brotli
+chmod +x brotli
 echo 
 echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
 ls *.br
@@ -588,7 +588,7 @@ echo
 read -p "请输入您的Br文件>>>" brfile
 echo 
 echo -e "\033[32m开始解压\033[0m"
-tools/brotli --decompress $brfile
+brotli --decompress $brfile
 echo 
 echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
 ls *.list
@@ -623,7 +623,7 @@ fi
 fi
 #解压方式4
 if [[ $unpack == "4" ]]; then
-chmod +x tools/brotli
+chmod +x brotli
 echo 
 echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
 ls *.br
@@ -631,7 +631,7 @@ echo
 read -p "请输入您的Br文件>>>" brfile
 echo 
 echo -e "\033[32m开始解压\033[0m"
-tools/brotli --decompress $brfile
+brotli --decompress $brfile
 echo 
 echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
 ls *.list
@@ -746,7 +746,7 @@ fi
 fi
 #解压方式7
 if [[ $unpack == "7" ]]; then
-chmod +x tools/brotli
+chmod +x brotli
 echo 
 echo -e "\033[34m当前项目目录内的Zip文件有:\033[0m"
 ls *.zip
@@ -762,7 +762,7 @@ echo
 read -p "请输入您的Br文件>>>" brfile
 echo 
 echo -e "\033[32m开始解压\033[0m"
-tools/brotli --decompress $brfile
+brotli --decompress $brfile
 echo 
 echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
 ls *.list
@@ -780,7 +780,7 @@ main
 fi
 #解压方式8
 if [[ $unpack == "8" ]]; then
-chmod +x tools/brotli
+chmod +x brotli
 echo 
 echo -e "\033[34m当前项目目录内的Zip文件有:\033[0m"
 ls *.zip
@@ -796,7 +796,7 @@ echo
 read -p "请输入您的Br文件>>>" brfile
 echo 
 echo -e "\033[32m开始解压\033[0m"
-tools/brotli --decompress $brfile
+brotli --decompress $brfile
 echo 
 echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
 ls *.list
@@ -818,7 +818,7 @@ main
 fi
 #解压方式9
 if [[ $unpack == "9" ]]; then
-chmod +x tools/brotli
+chmod +x brotli
 echo 
 echo -e "\033[34m当前项目目录内的Zip文件有:\033[0m"
 ls *.zip
@@ -834,7 +834,7 @@ echo
 read -p "请输入您的Br文件>>>" brfile
 echo 
 echo -e "\033[32m开始解压\033[0m"
-tools/brotli --decompress $brfile
+brotli --decompress $brfile
 echo 
 echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
 ls *.list
@@ -869,7 +869,7 @@ fi
 fi
 #解压方式0
 if [[ $unpack == "0" ]]; then
-chmod +x tools/brotli
+chmod +x brotli
 echo 
 echo -e "\033[34m当前项目目录内的Zip文件有:\033[0m"
 ls *.zip
@@ -885,7 +885,7 @@ echo
 read -p "请输入您的Br文件>>>" brfile
 echo 
 echo -e "\033[32m开始解压\033[0m"
-tools/brotli --decompress $brfile
+brotli --decompress $brfile
 echo 
 echo -e "\033[34m当前项目目录内的transfer.list文件有:\033[0m"
 ls *.list
@@ -929,7 +929,7 @@ fi
 fi
 #自动解压
 if [[ $unpack == "auto" ]]; then
-chmod +x tools/brotli
+chmod +x brotli
 echo 
 echo -e "\033[34m当前项目目录内的Zip文件有:\033[0m"
 ls *.zip
@@ -943,25 +943,25 @@ echo
 if [[ -f "system.new.dat.br" ]]; then
 echo 
 echo -e "\033[32m开始解压system.new.dat.br\033[0m"
-tools/brotli --decompress system.new.dat.br
+brotli --decompress system.new.dat.br
 rm -rf system.new.dat.br
 fi
 if [[ -f "vendor.new.dat.br" ]]; then
 echo 
 echo -e "\033[32m开始解压vendor.new.dat.br\033[0m"
-tools/brotli --decompress vendor.new.dat.br
+brotli --decompress vendor.new.dat.br
 rm -rf vendor.new.dat.br
 fi
 if [[ -f "product.new.dat.br" ]]; then
 echo 
 echo -e "\033[32m开始解压product.new.dat.br\033[0m"
-tools/brotli --decompress product.new.dat.br
+brotli --decompress product.new.dat.br
 rm -rf product.new.dat.br
 fi
 if [[ -f "odm.new.dat.br" ]]; then
 echo 
 echo -e "\033[32m开始解压odm.new.dat.br\033[0m"
-tools/brotli --decompress odm.new.dat.br
+brotli --decompress odm.new.dat.br
 rm -rf odm.new.dat.br
 fi
 if [[ -f "system.new.dat" ]]; then
@@ -1453,7 +1453,7 @@ main
 start
 }
 autorom(){
-chmod +x tools/brotli
+chmod +x brotli
 echo 
 echo -e "\033[32m当前仅支持Android10且非动态分区\033[0m"
 echo -e "\033[32m如无问题请输入 yes 以继续\033[0m"
@@ -1475,10 +1475,10 @@ unzip $zipfile
 rm -rf $zipfile
 echo 
 echo -e "\033[32m开始解压system.new.dat.br...\033[0m"
-../tools/brotli --decompress system.new.dat.br
+brotli --decompress system.new.dat.br
 echo 
 echo -e "\033[32m开始解压vendor.new.dat.br...\033[0m"
-../tools/brotli --decompress vendor.new.dat.br
+brotli --decompress vendor.new.dat.br
 echo 
 echo -e "\033[32m开始解压system.new.dat...\033[0m"
 python3 ../tools/sdat2img/sdat2img.py system.transfer.list system.new.dat system.img >>/dev/null 2>&1
@@ -1568,10 +1568,10 @@ echo -e "\033[32m开始打包vendor.new.dat...\033[0m"
 python3 ../tools/img2sdat/img2sdat.py vendor.img -v 4 -p vendor >> /dev/null 2>&1
 echo 
 echo -e "\033[32m开始打包system.new.dat.br...\033[0m"
-../tools/brotli -q 3 system.new.dat
+brotli -q 3 system.new.dat
 echo 
 echo -e "\033[32m开始打包vendor.new.dat.br...\033[0m"
-../tools/brotli -q 3 vendor.new.dat
+brotli -q 3 vendor.new.dat
 rm -rf system.new.dat system.img system
 rm -rf vendor.new.dat vendor.img vendor
 rm -rf system_file_context system_size.txt system_fs_config
