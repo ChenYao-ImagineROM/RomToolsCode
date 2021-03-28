@@ -1,0 +1,1 @@
+python3 ./build_super_image.py ./misc_info.txt ./images/super.img
