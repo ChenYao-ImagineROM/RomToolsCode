@@ -1410,35 +1410,57 @@ classes(){
 echo 
 echo -e "\033[32m正在准备核心文件...\033[0m"
 echo 
-echo -e "\033[31m如果有classes2.dex 请输入classes2(不用输入.dex)\033[0m"
-echo -e "\033[31m没有请输入classes(不用输入.dex) 均无请先deodex后再试\033[0m"
-echo 
-ls temp/*.dex
-echo 
-read -p "请输入>>>" classfile
-echo 
+if [[ -f "classses2.dex" ]]; then
+class2
+fi
 echo -e "\033[32m开始展开dex...\033[0m"
-java -jar tools/services/baksmali.jar disassemble temp/$classfile'.dex' -o temp/$classfile
+java -jar tools/services/baksmali.jar disassemble temp/classes.dex -o temp/classes
 echo 
 echo -e "\033[32m开始删除卡米代码...\033[0m"
-sed -i '/^.method private checkSystemSelfProtection(Z)V/,/^.end method/{//!d}' temp/$classfile/com/miui/server/SecurityManagerService.smali
-sed -i -e '/^.method private checkSystemSelfProtection(Z)V/a\    .registers 2\n\n    return-void' temp/$classfile/com/miui/server/SecurityManagerService.smali
+sed -i '/^.method private checkSystemSelfProtection(Z)V/,/^.end method/{//!d}' temp/classes/com/miui/server/SecurityManagerService.smali
+sed -i -e '/^.method private checkSystemSelfProtection(Z)V/a\    .registers 2\n\n    return-void' temp/classes/com/miui/server/SecurityManagerService.smali
 echo  
 repack
 }
 repack(){
 echo -e "\033[32m开始清理文件...\033[0m"
-rm -rf temp/$classesfile'.dex' temp/services.zip
+rm -rf temp/classes.dex temp/services.zip
 echo 
 echo -e "\033[32m开始打包classes2.dex...\033[0m"
-java -jar tools/services/smali.jar assemble temp/$classfile -o temp/$classfile'.dex'
+java -jar tools/services/smali.jar assemble temp/classes.dex -o temp/classes.dex
 echo 
 echo -e "\033[32m开始打包services.jar...\033[0m"
 cd temp
-zip -r services.zip *.dex META-INF/
+zip -r services.zip classes.dex META-INF/
 mv services.zip services.jar
 midone
 }
+
+class2(){
+echo -e "\033[32m开始展开dex...\033[0m"
+java -jar tools/services/baksmali.jar disassemble temp/classes2.dex -o temp/classes2
+echo 
+echo -e "\033[32m开始删除卡米代码...\033[0m"
+sed -i '/^.method private checkSystemSelfProtection(Z)V/,/^.end method/{//!d}' temp/classes2/com/miui/server/SecurityManagerService.smali
+sed -i -e '/^.method private checkSystemSelfProtection(Z)V/a\    .registers 2\n\n    return-void' temp/classes2/com/miui/server/SecurityManagerService.smali
+echo  
+repack
+}
+repack(){
+echo -e "\033[32m开始清理文件...\033[0m"
+rm -rf temp/classes2.dex temp/services.zip
+echo 
+echo -e "\033[32m开始打包classes2.dex...\033[0m"
+java -jar tools/services/smali.jar assemble temp/classes2 -o temp/classes2.dex
+echo 
+echo -e "\033[32m开始打包services.jar...\033[0m"
+cd temp
+zip -r services.zip classes.dex classes2.dex META-INF/
+mv services.zip services.jar
+midone
+fi
+}
+
 midone(){
 cd ..
 mv temp/services.jar .
