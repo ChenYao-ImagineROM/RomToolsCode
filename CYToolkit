@@ -218,7 +218,7 @@ fi
 fi
 #打包br
 if [[ $br == "2" ]]; then
-chmod +x brotli
+
 echo -e "\033[34m   ========CYToolkit=======\033[0m"
 echo -e "\033[32m  ‖1.Dat转Br      2.img转Br‖\033[0m"
 echo -e "\033[34m   ========================\033[0m"
@@ -520,7 +520,7 @@ main
 fi
 #解压方式1
 if [[ $unpack == "1" ]]; then
-chmod +x brotli
+
 echo 
 echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
 ls *.br
@@ -546,7 +546,7 @@ main
 fi
 #解压方式2
 if [[ $unpack == "2" ]]; then
-chmod +x brotli
+
 echo 
 echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
 ls *.br
@@ -575,7 +575,7 @@ main
 fi
 #解压方式3
 if [[ $unpack == "3" ]]; then
-chmod +x brotli
+
 echo 
 echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
 ls *.br
@@ -618,7 +618,7 @@ fi
 fi
 #解压方式4
 if [[ $unpack == "4" ]]; then
-chmod +x brotli
+
 echo 
 echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
 ls *.br
@@ -741,7 +741,7 @@ fi
 fi
 #解压方式7
 if [[ $unpack == "7" ]]; then
-chmod +x brotli
+
 echo 
 echo -e "\033[34m当前项目目录内的Zip文件有:\033[0m"
 ls *.zip
@@ -775,7 +775,7 @@ main
 fi
 #解压方式8
 if [[ $unpack == "8" ]]; then
-chmod +x brotli
+
 echo 
 echo -e "\033[34m当前项目目录内的Zip文件有:\033[0m"
 ls *.zip
@@ -813,7 +813,7 @@ main
 fi
 #解压方式9
 if [[ $unpack == "9" ]]; then
-chmod +x brotli
+
 echo 
 echo -e "\033[34m当前项目目录内的Zip文件有:\033[0m"
 ls *.zip
@@ -864,7 +864,7 @@ fi
 fi
 #解压方式0
 if [[ $unpack == "0" ]]; then
-chmod +x brotli
+
 echo 
 echo -e "\033[34m当前项目目录内的Zip文件有:\033[0m"
 ls *.zip
@@ -924,7 +924,7 @@ fi
 fi
 #自动解压
 if [[ $unpack == "auto" ]]; then
-chmod +x brotli
+
 echo 
 echo -e "\033[34m当前项目目录内的Zip文件有:\033[0m"
 ls *.zip
@@ -1470,7 +1470,7 @@ main
 start
 }
 autorom(){
-chmod +x brotli
+
 echo 
 echo -e "\033[32m当前仅支持Android10且非动态分区\033[0m"
 echo -e "\033[32m如无问题请输入 yes 以继续\033[0m"
