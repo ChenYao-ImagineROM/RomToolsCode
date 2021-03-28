@@ -190,7 +190,6 @@ echo -e "\033[34m   ========================\033[0m"
 read -p "请选择>>>" br
 #解压br
 if [[ $br == "1" ]]; then
-chmod +x brotli
 echo 
 echo -e "\033[34m当前项目目录内的Br文件有:\033[0m"
 ls *.br
@@ -198,11 +197,7 @@ echo
 read -p "请输入您的Br文件>>>" brfile
 echo 
 echo -e "\033[32m开始解压\033[0m"
-start=`date +%s`
 brotli --decompress $brfile
-end=`date +%s`
-time=`echo $start $end | awk '{print $2-$1}'`
-echo 耗时$time秒
 echo 
 echo -e "\033[33m是否需要删除源文件?\033[0m" 
 echo -e "\033[32m1.需要\033[0m"
@@ -297,8 +292,8 @@ echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
 ls *.new.dat
 echo 
 read -p "请输入您的transfer.list文件>>>" transfer
-read -p "请输入您的new.dat文件(别带后缀)>>" datfile
-python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+read -p "请输入您的new.dat文件(别带.new.dat)>>" datfile
+python3 tools/sdat2img.py $transfer $datfile'.new.dat'
 mv system.img $datfile'.img' >>/dev/null 2>&1
 echo 
 echo -e "\033[33m是否需要删除源文件?\033[0m" 
@@ -541,8 +536,8 @@ echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
 ls *.new.dat
 echo 
 read -p "请输入您的transfer.list文件>>>" transfer
-read -p "请输入您的new.dat文件(别带后缀)>>" datfile
-python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+read -p "请输入您的new.dat文件(别带.new.dat)>>" datfile
+python3 tools/sdat2img.py $transfer $datfile'.new.dat'
 mv system.img $datfile'.img' >>/dev/null 2>&1
 echo 
 echo -e "\033[34m解压完成\033[0m"
@@ -567,8 +562,8 @@ echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
 ls *.new.dat
 echo 
 read -p "请输入您的transfer.list文件>>>" transfer
-read -p "请输入您的new.dat文件(别带后缀)>>" datfile
-python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+read -p "请输入您的new.dat文件(别带.new.dat)>>" datfile
+python3 tools/sdat2img.py $transfer $datfile'.new.dat'
 mv system.img $datfile'.img' >>/dev/null 2>&1
 echo 
 rm -rf $brfile
@@ -596,8 +591,8 @@ echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
 ls *.new.dat
 echo 
 read -p "请输入您的transfer.list文件>>>" transfer
-read -p "请输入您的new.dat文件(别带后缀)>>" datfile
-python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+read -p "请输入您的new.dat文件(别带.new.dat)>>" datfile
+python3 tools/sdat2img.py $transfer $datfile'.new.dat'
 mv system.img $datfile'.img' >>/dev/null 2>&1
 echo 
 echo -e "\033[34m当前项目目录内的img文件有:\033[0m"
@@ -639,8 +634,8 @@ echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
 ls *.new.dat
 echo 
 read -p "请输入您的transfer.list文件>>>" transfer
-read -p "请输入您的new.dat文件(别带后缀)>>" datfile
-python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+read -p "请输入您的new.dat文件(别带.new.dat)>>" datfile
+python3 tools/sdat2img.py $transfer $datfile'.new.dat'
 mv system.img $datfile'.img' >>/dev/null 2>&1
 echo 
 echo -e "\033[34m当前项目目录内的img文件有:\033[0m"
@@ -680,8 +675,8 @@ echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
 ls *.new.dat
 echo 
 read -p "请输入您的transfer.list文件>>>" transfer
-read -p "请输入您的new.dat文件(别带后缀)>>" datfile
-python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+read -p "请输入您的new.dat文件(别带.new.dat)>>" datfile
+python3 tools/sdat2img.py $transfer $datfile'.new.dat'
 mv system.img $datfile'.img' >>/dev/null 2>&1
 echo 
 echo -e "\033[34m当前项目目录内的img文件有:\033[0m"
@@ -714,8 +709,8 @@ echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
 ls *.new.dat
 echo 
 read -p "请输入您的transfer.list文件>>>" transfer
-read -p "请输入您的new.dat文件(别带后缀)>>" datfile
-python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+read -p "请输入您的new.dat文件(别带.new.dat)>>" datfile
+python3 tools/sdat2img.py $transfer $datfile'.new.dat'
 mv system.img $datfile'.img' >>/dev/null 2>&1
 echo 
 echo -e "\033[34m当前项目目录内的img文件有:\033[0m"
@@ -770,8 +765,8 @@ echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
 ls *.new.dat
 echo 
 read -p "请输入您的transfer.list文件>>>" transfer
-read -p "请输入您的new.dat文件(别带后缀)>>" datfile
-python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+read -p "请输入您的new.dat文件(别带.new.dat)>>" datfile
+python3 tools/sdat2img.py $transfer $datfile'.new.dat'
 mv system.img $datfile'.img' >>/dev/null 2>&1
 echo 
 echo -e "\033[34m解压完成\033[0m"
@@ -804,8 +799,8 @@ echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
 ls *.new.dat
 echo 
 read -p "请输入您的transfer.list文件>>>" transfer
-read -p "请输入您的new.dat文件(别带后缀)>>" datfile
-python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+read -p "请输入您的new.dat文件(别带.new.dat)>>" datfile
+python3 tools/sdat2img.py $transfer $datfile'.new.dat'
 mv system.img $datfile'.img' >>/dev/null 2>&1
 echo 
 rm -rf $zipfile
@@ -842,8 +837,8 @@ echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
 ls *.new.dat
 echo 
 read -p "请输入您的transfer.list文件>>>" transfer
-read -p "请输入您的new.dat文件(别带后缀)>>" datfile
-python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+read -p "请输入您的new.dat文件(别带.new.dat)>>" datfile
+python3 tools/sdat2img.py $transfer $datfile'.new.dat'
 mv system.img $datfile'.img' >>/dev/null 2>&1
 echo 
 echo -e "\033[34m当前项目目录内的img文件有:\033[0m"
@@ -893,8 +888,8 @@ echo -e "\033[34m当前项目目录内的new.dat文件有:\033[0m"
 ls *.new.dat
 echo 
 read -p "请输入您的transfer.list文件>>>" transfer
-read -p "请输入您的new.dat文件(别带后缀)>>" datfile
-python3 tools/sdat2img/sdat2img.py $transfer $datfile'.new.dat'
+read -p "请输入您的new.dat文件(别带.new.dat)>>" datfile
+python3 tools/sdat2img.py $transfer $datfile'.new.dat'
 mv system.img $datfile'.img' >>/dev/null 2>&1
 echo 
 echo -e "\033[34m当前项目目录内的img文件有:\033[0m"
@@ -967,25 +962,25 @@ fi
 if [[ -f "system.new.dat" ]]; then
 echo 
 echo -e "\033[32m开始解压system.new.dat\033[0m"
-python3 tools/sdat2img/sdat2img.py system.transfer.list system.new.dat system.img >>/dev/null 2>&1
+python3 tools/sdat2img.py system.transfer.list system.new.dat system.img >>/dev/null 2>&1
 rm -rf system.transfer.list system.new.dat system.patch.dat
 fi
 if [[ -f "vendor.new.dat" ]]; then
 echo 
 echo -e "\033[32m开始解压vendor.new.dat\033[0m"
-python3 tools/sdat2img/sdat2img.py vendor.transfer.list vendor.new.dat vendor.img >>/dev/null 2>&1
+python3 tools/sdat2img.py vendor.transfer.list vendor.new.dat vendor.img >>/dev/null 2>&1
 rm -rf vendor.transfer.list vendor.new.dat vendor.patch.dat
 fi
 if [[ -f "product.new.dat" ]]; then
 echo 
 echo -e "\033[32m开始解压product.new.dat\033[0m"
-python3 tools/sdat2img/sdat2img.py product.transfer.list product.new.dat product.img >>/dev/null 2>&1
+python3 tools/sdat2img.py product.transfer.list product.new.dat product.img >>/dev/null 2>&1
 rm -rf product.transfer.list product.new.dat product.patch.dat
 fi
 if [[ -f "odm.new.dat" ]]; then
 echo 
 echo -e "\033[32m开始解压odm.new.dat\033[0m"
-python3 tools/sdat2img/sdat2img.py odm.transfer.list odm.new.dat odm.img >>/dev/null 2>&1
+python3 tools/sdat2img.py odm.transfer.list odm.new.dat odm.img >>/dev/null 2>&1
 rm -rf odm.transfer.list odm.new.dat odm.patch.dat
 fi
 if [[ -f "system.img" ]]; then
@@ -1503,10 +1498,10 @@ echo -e "\033[32m开始解压vendor.new.dat.br...\033[0m"
 brotli --decompress vendor.new.dat.br
 echo 
 echo -e "\033[32m开始解压system.new.dat...\033[0m"
-python3 ../tools/sdat2img/sdat2img.py system.transfer.list system.new.dat system.img >>/dev/null 2>&1
+python3 ../tools/sdat2img.py system.transfer.list system.new.dat system.img >>/dev/null 2>&1
 echo 
 echo -e "\033[32m开始解压vendor.new.dat...\033[0m"
-python3 ../tools/sdat2img/sdat2img.py vendor.transfer.list vendor.new.dat vendor.img >>/dev/null 2>&1
+python3 ../tools/sdat2img.py vendor.transfer.list vendor.new.dat vendor.img >>/dev/null 2>&1
 echo 
 echo -e "\033[32m开始解压system.img...\033[0m"
 python3 ../tools/imgextractor/imgextractor.py system.img system >>/dev/null 2>&1
