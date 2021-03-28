@@ -1458,7 +1458,7 @@ cd temp
 zip -r services.zip classes.dex classes2.dex META-INF/
 mv services.zip services.jar
 midone
-fi
+
 }
 
 midone(){
@@ -1516,7 +1516,7 @@ echo
 echo -e "\033[32m开始解压vendor.img...\033[0m"
 python3 ../tools/imgextractor/imgextractor.py vendor.img vendor.img >>/dev/null 2>&1
 rm -rf system.new.dat system.new.dat.br
-rm -rf vendor.new.dat vendor.new.dat.br
+rm -rf vendo    .dat vendor.new.dat.br
 rm -rf system.img vendor.img
 rm -rf system.patch.dat system.transfer.list
 rm -rf vendor.patch.dat vendor.transfer.list 
